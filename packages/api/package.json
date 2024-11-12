@@ -1,0 +1,24 @@
+{
+  "name": "@nodejs-orchestration/api",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@nodejs-orchestration/core": "workspace:*",
+    "@nodejs-orchestration/error-handler": "workspace:*",
+    "@nodejs-orchestration/logger": "workspace:*",
+    "zod": "^3.22.2",
+    "axios": "^1.5.0"
+  },
+  "devDependencies": {
+    "tsup": "^7.2.0",
+    "vitest": "^0.34.4"
+  }
+}

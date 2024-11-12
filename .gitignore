@@ -1,0 +1,30 @@
+# Node modules
+node_modules
+
+# Build outputs
+dist
+*.tsbuildinfo
+
+# Turbo cache
+.turbo
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.*local
+
+# IDE specific files
+.vscode/
+.idea/
+
+# MacOS specific files
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+
+# Coverage reports
+coverage
