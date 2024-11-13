@@ -9,7 +9,7 @@ export const AgentConfigSchema = z.object({
 export type AgentConfig = z.infer<typeof AgentConfigSchema>;
 
 export interface AgentState {
-  status: 'idle' | 'busy' | 'error';
+  status: 'idle' | 'busy' | 'error' | 'stopped' | 'paused';
   currentTasks: Set<string>;
   lastActivity: Date;
 }
@@ -19,4 +19,6 @@ export interface TaskContext {
   data: Record<string, unknown>;
   startTime: Date;
   status: 'running' | 'completed' | 'failed';
+  result?: unknown;
+  error?: Error;
 }
