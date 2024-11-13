@@ -1,0 +1,28 @@
+{
+  "name": "@nodejs-orchestration/examples",
+  "version": "0.1.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist",
+    "test": "vitest",
+    "demo:customer-service": "tsx -r dotenv/config  ./src/customer-service-demo/demo.ts",
+    "demo:agent": "tsx -r dotenv/config  ./src/agent-demo/demo.ts"
+  },
+  "dependencies": {
+    "@nodejs-orchestration/error-handler": "workspace:*",
+    "@nodejs-orchestration/logger": "workspace:*",
+    "@nodejs-orchestration/tools": "workspace:*",
+    "@nodejs-orchestration/workflow": "workspace:*",
+    "dotenv": "^16.4.5",
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^7.2.0",
+    "tsx": "^4.19.2",
+    "vitest": "^0.34.4"
+  }
+}
