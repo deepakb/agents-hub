@@ -9,7 +9,9 @@ export const customerServiceWorkflow: Workflow = {
       id: 'analyze-inquiry',
       name: 'Analyze Customer Inquiry',
       toolId: 'sentiment-analysis',
-      params: {},
+      params: {
+        inquiry: '{{context.inquiry}}'
+      },
       onError: { retry: true }
     },
     {
