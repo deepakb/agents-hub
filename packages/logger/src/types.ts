@@ -1,5 +1,5 @@
-type StandardLogLevel = 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace';
-type CustomLogLevel = 'task-progress' | 'agent-activity';
+type StandardLogLevel = "fatal" | "error" | "warn" | "info" | "debug" | "trace";
+type CustomLogLevel = "task-progress" | "agent-activity";
 export type LogLevel = StandardLogLevel | CustomLogLevel;
 
 export interface LoggerConfig {
@@ -9,6 +9,6 @@ export interface LoggerConfig {
 }
 
 export interface LogDestination {
-  type: 'console' | 'file' | 'external';
+  type: "console" | "file" | "external";
   options?: Record<string, unknown>;
 }

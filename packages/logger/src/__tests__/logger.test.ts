@@ -1,10 +1,10 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { Logger } from '../logger';
-import { LoggerConfig } from '../types';
-import pino from 'pino';
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { Logger } from "../logger";
+import { LoggerConfig } from "../types";
+import pino from "pino";
 
 // Mock pino
-vi.mock('pino', () => {
+vi.mock("pino", () => {
   return {
     default: vi.fn(() => ({
       fatal: vi.fn(),
@@ -12,19 +12,19 @@ vi.mock('pino', () => {
       warn: vi.fn(),
       info: vi.fn(),
       debug: vi.fn(),
-      trace: vi.fn()
-    }))
+      trace: vi.fn(),
+    })),
   };
 });
 
-describe('Logger', () => {
+describe("Logger", () => {
   let logger: Logger;
   let mockPinoLogger: ReturnType<typeof pino>;
-  
+
   const defaultConfig: LoggerConfig = {
-    level: 'info',
-    destinations: [{ type: 'console' }],
-    redactKeys: ['password', 'token']
+    level: "info",
+    destinations: [{ type: "console" }],
+    redactKeys: ["password", "token"],
   };
 
   beforeEach(() => {
@@ -33,34 +33,34 @@ describe('Logger', () => {
     mockPinoLogger = (logger as any).logger;
   });
 
-  it('should initialize with correct configuration', () => {
+  it("should initialize with correct configuration", () => {
     expect(pino).toHaveBeenCalledWith({
       level: defaultConfig.level,
       redact: defaultConfig.redactKeys,
       transport: {
-        target: 'pino-pretty'
-      }
+        target: "pino-pretty",
+      },
     });
   });
 
-  it('should log standard levels correctly', () => {
-    const testData = { key: 'value' };
-    const testMessage = 'Test message';
+  it("should log standard levels correctly", () => {
+    const testData = { key: "value" };
+    const testMessage = "Test message";
 
-    logger.log('error', testMessage, testData);
+    logger.log("error", testMessage, testData);
     expect(mockPinoLogger.error).toHaveBeenCalledWith(testData, testMessage);
 
-    logger.log('info', testMessage, testData);
+    logger.log("info", testMessage, testData);
     expect(mockPinoLogger.info).toHaveBeenCalledWith(testData, testMessage);
 
-    logger.log('debug', testMessage, testData);
+    logger.log("debug", testMessage, testData);
     expect(mockPinoLogger.debug).toHaveBeenCalledWith(testData, testMessage);
   });
 
-  it('should handle task progress logging', () => {
-    const taskId = 'task-123';
+  it("should handle task progress logging", () => {
+    const taskId = "task-123";
     const progress = 50;
-    const status = 'processing';
+    const status = "processing";
 
     logger.logTaskProgress(taskId, progress, status);
     expect(mockPinoLogger.info).toHaveBeenCalledWith(
@@ -68,62 +68,64 @@ describe('Logger', () => {
         taskId,
         progress,
         status,
-        eventType: 'task-progress'
+        eventType: "task-progress",
       },
-      `Task ${taskId} progress: ${progress}%`
+      `Task ${taskId} progress: ${progress}%`,
     );
   });
 
-  it('should handle agent activity logging', () => {
-    const agentId = 'agent-123';
-    const action = 'started';
-    const details = { taskId: 'task-123' };
+  it("should handle agent activity logging", () => {
+    const agentId = "agent-123";
+    const action = "started";
+    const details = { taskId: "task-123" };
 
     logger.logAgentActivity(agentId, action, details);
     expect(mockPinoLogger.info).toHaveBeenCalledWith(
       {
         agentId,
         action,
-        taskId: 'task-123',
-        eventType: 'agent-activity'
+        taskId: "task-123",
+        eventType: "agent-activity",
       },
-      `Agent ${agentId} ${action}`
+      `Agent ${agentId} ${action}`,
     );
   });
 
-  it('should handle logging without data', () => {
-    const testMessage = 'Test message';
-    
-    logger.log('info', testMessage);
+  it("should handle logging without data", () => {
+    const testMessage = "Test message";
+
+    logger.log("info", testMessage);
     expect(mockPinoLogger.info).toHaveBeenCalledWith(undefined, testMessage);
   });
 
-  it('should respect redaction configuration', () => {
+  it("should respect redaction configuration", () => {
     const sensitiveData = {
-      username: 'test',
-      password: 'secret',
-      token: '12345'
+      username: "test",
+      password: "secret",
+      token: "12345",
     };
 
-    logger.log('info', 'Sensitive data', sensitiveData);
-    expect(pino).toHaveBeenCalledWith(expect.objectContaining({
-      redact: ['password', 'token']
-    }));
+    logger.log("info", "Sensitive data", sensitiveData);
+    expect(pino).toHaveBeenCalledWith(
+      expect.objectContaining({
+        redact: ["password", "token"],
+      }),
+    );
   });
 
-  it('should handle custom log levels correctly', () => {
-    const customData = { key: 'value' };
-    
-    logger.log('task-progress', 'Custom event', customData);
+  it("should handle custom log levels correctly", () => {
+    const customData = { key: "value" };
+
+    logger.log("task-progress", "Custom event", customData);
     expect(mockPinoLogger.info).toHaveBeenCalledWith(
-      { ...customData, eventType: 'task-progress' },
-      'Custom event'
+      { ...customData, eventType: "task-progress" },
+      "Custom event",
     );
 
-    logger.log('agent-activity', 'Custom event', customData);
+    logger.log("agent-activity", "Custom event", customData);
     expect(mockPinoLogger.info).toHaveBeenCalledWith(
-      { ...customData, eventType: 'agent-activity' },
-      'Custom event'
+      { ...customData, eventType: "agent-activity" },
+      "Custom event",
     );
   });
 });

@@ -53,16 +53,19 @@ Enables complex task orchestration:
 ## Design Principles
 
 1. **Modularity**
+
    - Independent, loosely coupled components
    - Clear separation of concerns
    - Pluggable architecture for extensions
 
 2. **Reliability**
+
    - Comprehensive error handling
    - Retry mechanisms
    - State management and recovery
 
 3. **Scalability**
+
    - Asynchronous operations
    - Parallel task execution
    - Resource management
@@ -75,11 +78,13 @@ Enables complex task orchestration:
 ## Data Flow
 
 1. Task Submission
+
    ```
    Client → Orchestrator → Agent → Tool
    ```
 
 2. Workflow Execution
+
    ```
    Workflow Engine → Steps → Tools → Results
    ```
@@ -92,11 +97,13 @@ Enables complex task orchestration:
 ## Extension Points
 
 1. **Custom Agents**
+
    - Implement new agent types
    - Add specialized capabilities
    - Custom task handling
 
 2. **Tool Integration**
+
    - Register new tools
    - Custom tool implementations
    - Tool composition

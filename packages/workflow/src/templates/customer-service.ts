@@ -1,41 +1,41 @@
-import { Workflow } from '../types';
+import { Workflow } from "../types";
 
 export const customerServiceWorkflow: Workflow = {
-  id: 'customer-service',
-  name: 'Customer Service Automation',
-  description: 'Automates customer inquiry handling and resolution',
+  id: "customer-service",
+  name: "Customer Service Automation",
+  description: "Automates customer inquiry handling and resolution",
   steps: [
     {
-      id: 'analyze-inquiry',
-      name: 'Analyze Customer Inquiry',
-      toolId: 'sentiment-analysis',
+      id: "analyze-inquiry",
+      name: "Analyze Customer Inquiry",
+      toolId: "sentiment-analysis",
       params: {
-        inquiry: '{{context.inquiry}}'
+        inquiry: "{{context.inquiry}}",
       },
-      onError: { retry: true }
+      onError: { retry: true },
     },
     {
-      id: 'categorize-issue',
-      name: 'Categorize Issue',
-      toolId: 'issue-categorizer',
+      id: "categorize-issue",
+      name: "Categorize Issue",
+      toolId: "issue-categorizer",
       params: {},
-      dependsOn: ['analyze-inquiry']
+      dependsOn: ["analyze-inquiry"],
     },
     {
-      id: 'generate-response',
-      name: 'Generate Response',
-      toolId: 'response-generator',
+      id: "generate-response",
+      name: "Generate Response",
+      toolId: "response-generator",
       params: {},
-      dependsOn: ['categorize-issue'],
+      dependsOn: ["categorize-issue"],
       onError: {
-        fallback: 'human-escalation'
-      }
+        fallback: "human-escalation",
+      },
     },
     {
-      id: 'human-escalation',
-      name: 'Escalate to Human Agent',
-      toolId: 'escalation-handler',
-      params: {}
-    }
-  ]
+      id: "human-escalation",
+      name: "Escalate to Human Agent",
+      toolId: "escalation-handler",
+      params: {},
+    },
+  ],
 };

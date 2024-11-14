@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const AgentConfigSchema = z.object({
   maxConcurrentTasks: z.number().default(5),
@@ -9,7 +9,7 @@ export const AgentConfigSchema = z.object({
 export type AgentConfig = z.infer<typeof AgentConfigSchema>;
 
 export interface AgentState {
-  status: 'idle' | 'busy' | 'error' | 'stopped' | 'paused';
+  status: "idle" | "busy" | "error" | "stopped" | "paused";
   currentTasks: Set<string>;
   lastActivity: Date;
 }
@@ -18,7 +18,7 @@ export interface TaskContext {
   taskId: string;
   data: Record<string, unknown>;
   startTime: Date;
-  status: 'running' | 'completed' | 'failed';
+  status: "running" | "completed" | "failed";
   result?: unknown;
   error?: Error;
 }

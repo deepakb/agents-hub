@@ -1,5 +1,5 @@
-import { Tool, ToolSchema } from './types';
-import { ToolError } from '@agent-forge/error-handler';
+import { Tool, ToolSchema } from "./types";
+import { ToolError } from "@agent-forge/error-handler";
 
 export class ToolRegistry {
   private tools: Map<string, Tool> = new Map();
@@ -17,7 +17,10 @@ export class ToolRegistry {
     return tool;
   }
 
-  async executeTool(toolId: string, params: Record<string, unknown>): Promise<unknown> {
+  async executeTool(
+    toolId: string,
+    params: Record<string, unknown>,
+  ): Promise<unknown> {
     const tool = this.getTool(toolId);
     return await tool.execute(params);
   }

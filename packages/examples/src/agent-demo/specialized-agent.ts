@@ -1,6 +1,6 @@
-import { Agent } from '@agent-forge/agents';
-import { Tool } from '@agent-forge/tools';
-import { Logger } from '@agent-forge/logger';
+import { Agent } from "@agent-forge/agents";
+import { Tool } from "@agent-forge/tools";
+import { Logger } from "@agent-forge/logger";
 
 export class SpecializedAgent extends Agent {
   private transferFunctions: Map<string, () => SpecializedAgent>;
@@ -10,13 +10,16 @@ export class SpecializedAgent extends Agent {
     name: string,
     private instructions: string,
     private tools: Tool[],
-    logger: Logger
+    logger: Logger,
   ) {
     super(id, name, {}, logger);
     this.transferFunctions = new Map();
   }
 
-  addTransferFunction(targetAgentId: string, transferFn: () => SpecializedAgent): void {
+  addTransferFunction(
+    targetAgentId: string,
+    transferFn: () => SpecializedAgent,
+  ): void {
     this.transferFunctions.set(targetAgentId, transferFn);
   }
 
@@ -35,4 +38,4 @@ export class SpecializedAgent extends Agent {
   getTools(): Tool[] {
     return this.tools;
   }
-} 
+}

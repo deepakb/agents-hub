@@ -8,8 +8,8 @@ The main orchestration engine that manages agents and tasks.
 
 ```typescript
 class Orchestrator {
-  registerAgent(agent: Agent): void
-  assignTask(task: Task): Promise<void>
+  registerAgent(agent: Agent): void;
+  assignTask(task: Task): Promise<void>;
 }
 ```
 
@@ -27,10 +27,10 @@ Represents an autonomous agent capable of executing tasks.
 
 ```typescript
 interface Agent {
-  id: string
-  name: string
-  description?: string
-  tools: string[]
+  id: string;
+  name: string;
+  description?: string;
+  tools: string[];
 }
 ```
 
@@ -40,13 +40,13 @@ Represents a unit of work to be executed.
 
 ```typescript
 interface Task {
-  id: string
-  type: 'sync' | 'async' | 'batch'
-  status: 'pending' | 'running' | 'completed' | 'failed'
-  agentId: string
-  data: Record<string, unknown>
-  createdAt: Date
-  updatedAt: Date
+  id: string;
+  type: "sync" | "async" | "batch";
+  status: "pending" | "running" | "completed" | "failed";
+  agentId: string;
+  data: Record<string, unknown>;
+  createdAt: Date;
+  updatedAt: Date;
 }
 ```
 
@@ -58,10 +58,13 @@ Manages available tools and their execution.
 
 ```typescript
 class ToolRegistry {
-  registerTool(tool: Tool): void
-  getTool(toolId: string): Tool
-  executeTool(toolId: string, params: Record<string, unknown>): Promise<unknown>
-  listTools(): Tool[]
+  registerTool(tool: Tool): void;
+  getTool(toolId: string): Tool;
+  executeTool(
+    toolId: string,
+    params: Record<string, unknown>,
+  ): Promise<unknown>;
+  listTools(): Tool[];
 }
 ```
 
@@ -69,14 +72,14 @@ class ToolRegistry {
 
 ```typescript
 interface Tool {
-  id: string
-  name: string
-  description: string
-  execute: (params: Record<string, unknown>) => Promise<unknown>
+  id: string;
+  name: string;
+  description: string;
+  execute: (params: Record<string, unknown>) => Promise<unknown>;
   schema: {
-    input: Record<string, unknown>
-    output: Record<string, unknown>
-  }
+    input: Record<string, unknown>;
+    output: Record<string, unknown>;
+  };
 }
 ```
 
@@ -90,8 +93,8 @@ Executes workflows composed of multiple steps.
 class WorkflowEngine {
   executeWorkflow(
     workflow: Workflow,
-    context?: Record<string, unknown>
-  ): Promise<Record<string, unknown>>
+    context?: Record<string, unknown>,
+  ): Promise<Record<string, unknown>>;
 }
 ```
 
@@ -99,21 +102,21 @@ class WorkflowEngine {
 
 ```typescript
 interface Workflow {
-  id: string
-  name: string
-  description: string
-  steps: WorkflowStep[]
+  id: string;
+  name: string;
+  description: string;
+  steps: WorkflowStep[];
 }
 
 interface WorkflowStep {
-  id: string
-  name: string
-  toolId: string
-  params: Record<string, unknown>
-  dependsOn?: string[]
+  id: string;
+  name: string;
+  toolId: string;
+  params: Record<string, unknown>;
+  dependsOn?: string[];
   onError?: {
-    retry?: boolean
-    fallback?: string
-  }
+    retry?: boolean;
+    fallback?: string;
+  };
 }
 ```

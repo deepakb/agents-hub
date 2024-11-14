@@ -20,59 +20,66 @@ npm install agent-forge
 ## Quick Start
 
 ```typescript
-import { Orchestrator, Agent } from '@agent-forge/core';
-import { ToolRegistry } from '@agent-forge/tools';
-import { Logger } from '@agent-forge/logger';
+import { Orchestrator, Agent } from "@agent-forge/core";
+import { ToolRegistry } from "@agent-forge/tools";
+import { Logger } from "@agent-forge/logger";
 
 // Initialize components
-const logger = new Logger({ level: 'info' });
+const logger = new Logger({ level: "info" });
 const toolRegistry = new ToolRegistry();
 const orchestrator = new Orchestrator();
 
 // Create an agent
-const agent = new Agent('agent-1', 'Processing Agent', {
-  maxConcurrentTasks: 5
-}, logger);
+const agent = new Agent(
+  "agent-1",
+  "Processing Agent",
+  {
+    maxConcurrentTasks: 5,
+  },
+  logger,
+);
 
 // Register agent
 orchestrator.registerAgent(agent);
 
 // Assign a task
 await orchestrator.assignTask({
-  id: 'task-1',
-  type: 'sync',
-  status: 'pending',
-  agentId: 'agent-1',
-  data: { /* task data */ },
+  id: "task-1",
+  type: "sync",
+  status: "pending",
+  agentId: "agent-1",
+  data: {
+    /* task data */
+  },
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(),
 });
 ```
 
 ## Workflow Example
 
 ```typescript
-import { WorkflowEngine } from '@agent-forge/workflow';
+import { WorkflowEngine } from "@agent-forge/workflow";
 
 const workflow = {
-  id: 'data-processing',
-  name: 'Data Processing Pipeline',
-  description: 'Process and analyze data',
+  id: "data-processing",
+  name: "Data Processing Pipeline",
+  description: "Process and analyze data",
   steps: [
     {
-      id: 'fetch-data',
-      name: 'Fetch Data',
-      toolId: 'data-fetcher',
-      params: { source: 'api' }
+      id: "fetch-data",
+      name: "Fetch Data",
+      toolId: "data-fetcher",
+      params: { source: "api" },
     },
     {
-      id: 'analyze',
-      name: 'Analyze Data',
-      toolId: 'data-analyzer',
+      id: "analyze",
+      name: "Analyze Data",
+      toolId: "data-analyzer",
       params: {},
-      dependsOn: ['fetch-data']
-    }
-  ]
+      dependsOn: ["fetch-data"],
+    },
+  ],
 };
 
 const engine = new WorkflowEngine(toolRegistry, retryManager, logger);

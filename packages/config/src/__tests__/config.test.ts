@@ -1,8 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { ConfigManager } from '../config';
-import { Logger } from '@agent-forge/logger';
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { ConfigManager } from "../config";
+import { Logger } from "@agent-forge/logger";
 
-describe('ConfigManager', () => {
+describe("ConfigManager", () => {
   const mockLogger = {
     log: vi.fn(),
     logConfigChange: vi.fn(),
@@ -15,53 +15,53 @@ describe('ConfigManager', () => {
     vi.clearAllMocks();
   });
 
-  it('should load default configuration', () => {
+  it("should load default configuration", () => {
     const config = configManager.getConfig();
     expect(config).toEqual({
-      environment: 'development',
-      logLevel: 'info',
+      environment: "development",
+      logLevel: "info",
       maxRetries: 3,
       timeout: 5000,
     });
   });
 
-  it('should update configuration', () => {
+  it("should update configuration", () => {
     configManager.updateConfig({
-      logLevel: 'debug',
+      logLevel: "debug",
       maxRetries: 5,
     });
 
     const config = configManager.getConfig();
-    expect(config.logLevel).toBe('debug');
+    expect(config.logLevel).toBe("debug");
     expect(config.maxRetries).toBe(5);
     expect(mockLogger.logConfigChange).toHaveBeenCalledWith({
-      logLevel: 'debug',
+      logLevel: "debug",
       maxRetries: 5,
     });
   });
 
-  it('should validate configuration updates', () => {
+  it("should validate configuration updates", () => {
     expect(() =>
       configManager.updateConfig({
-        logLevel: 'invalid-level',
-      })
+        logLevel: "invalid-level",
+      }),
     ).toThrow();
   });
 
-  it('should merge environment variables', () => {
-    process.env.NODE_ENV = 'production';
-    process.env.LOG_LEVEL = 'error';
-    
+  it("should merge environment variables", () => {
+    process.env.NODE_ENV = "production";
+    process.env.LOG_LEVEL = "error";
+
     configManager.loadFromEnv();
     const config = configManager.getConfig();
-    
-    expect(config.environment).toBe('production');
-    expect(config.logLevel).toBe('error');
+
+    expect(config.environment).toBe("production");
+    expect(config.logLevel).toBe("error");
   });
 
-  it('should reset configuration to defaults', () => {
+  it("should reset configuration to defaults", () => {
     configManager.updateConfig({
-      logLevel: 'debug',
+      logLevel: "debug",
       maxRetries: 5,
     });
 
@@ -69,29 +69,29 @@ describe('ConfigManager', () => {
     const config = configManager.getConfig();
 
     expect(config).toEqual({
-      environment: 'development',
-      logLevel: 'info',
+      environment: "development",
+      logLevel: "info",
       maxRetries: 3,
       timeout: 5000,
     });
   });
 
-  it('should validate configuration schema', () => {
+  it("should validate configuration schema", () => {
     expect(() =>
       configManager.updateConfig({
-        timeout: 'invalid-timeout',
-      } as any)
+        timeout: "invalid-timeout",
+      } as any),
     ).toThrow();
   });
 
-  it('should handle partial configuration updates', () => {
+  it("should handle partial configuration updates", () => {
     const originalConfig = configManager.getConfig();
     configManager.updateConfig({
-      logLevel: 'debug',
+      logLevel: "debug",
     });
 
     const updatedConfig = configManager.getConfig();
-    expect(updatedConfig.logLevel).toBe('debug');
+    expect(updatedConfig.logLevel).toBe("debug");
     expect(updatedConfig.maxRetries).toBe(originalConfig.maxRetries);
     expect(updatedConfig.timeout).toBe(originalConfig.timeout);
   });

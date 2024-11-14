@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const WorkflowStepSchema = z.object({
   id: z.string(),
@@ -6,10 +6,12 @@ export const WorkflowStepSchema = z.object({
   toolId: z.string(),
   params: z.record(z.unknown()),
   dependsOn: z.array(z.string()).optional(),
-  onError: z.object({
-    retry: z.boolean().optional(),
-    fallback: z.string().optional(),
-  }).optional(),
+  onError: z
+    .object({
+      retry: z.boolean().optional(),
+      fallback: z.string().optional(),
+    })
+    .optional(),
 });
 
 export const WorkflowSchema = z.object({

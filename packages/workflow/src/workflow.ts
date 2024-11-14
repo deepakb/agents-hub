@@ -1,16 +1,19 @@
-import { Workflow, WorkflowStep } from './types';
-import { ToolRegistry } from '@agent-forge/tools';
-import { RetryManager } from '@agent-forge/error-handler';
-import { Logger } from '@agent-forge/logger';
+import { Workflow, WorkflowStep } from "./types";
+import { ToolRegistry } from "@agent-forge/tools";
+import { RetryManager } from "@agent-forge/error-handler";
+import { Logger } from "@agent-forge/logger";
 
 export class WorkflowEngine {
   constructor(
     private toolRegistry: ToolRegistry,
     private retryManager: RetryManager,
-    private logger: Logger
+    private logger: Logger,
   ) {}
 
-  async executeWorkflow(workflow: Workflow, context: Record<string, unknown> = {}): Promise<Record<string, unknown>> {
+  async executeWorkflow(
+    workflow: Workflow,
+    context: Record<string, unknown> = {},
+  ): Promise<Record<string, unknown>> {
     const results: Record<string, unknown> = {};
     const completed = new Set<string>();
 
@@ -22,11 +25,17 @@ export class WorkflowEngine {
         results[step.id] = stepResult;
         completed.add(step.id);
       } catch (error) {
-        this.logger.log('error', `Step ${step.id} failed`, { error });
+        this.logger.log("error", `Step ${step.id} failed`, { error });
         if (step.onError?.fallback) {
-          const fallbackStep = workflow.steps.find(s => s.id === step.onError?.fallback);
+          const fallbackStep = workflow.steps.find(
+            (s) => s.id === step.onError?.fallback,
+          );
           if (fallbackStep) {
-            const fallbackResult = await this.executeStep(fallbackStep, context, results);
+            const fallbackResult = await this.executeStep(
+              fallbackStep,
+              context,
+              results,
+            );
             results[step.id] = fallbackResult;
             completed.add(step.id);
           }
@@ -42,7 +51,7 @@ export class WorkflowEngine {
   private async executeStep(
     step: WorkflowStep,
     context: Record<string, unknown>,
-    previousResults: Record<string, unknown>
+    previousResults: Record<string, unknown>,
   ): Promise<unknown> {
     const params = {
       ...step.params,
@@ -53,7 +62,7 @@ export class WorkflowEngine {
     if (step.onError?.retry) {
       return await this.retryManager.retry(
         () => this.toolRegistry.executeTool(step.toolId, params),
-        { taskId: step.id, attempt: 1 }
+        { taskId: step.id, attempt: 1 },
       );
     }
 
@@ -75,7 +84,7 @@ export class WorkflowEngine {
 
       if (step.dependsOn) {
         for (const depId of step.dependsOn) {
-          const depStep = steps.find(s => s.id === depId);
+          const depStep = steps.find((s) => s.id === depId);
           if (depStep) {
             visit(depStep);
           }

@@ -1,5 +1,5 @@
-import pino from 'pino';
-import { LoggerConfig, LogLevel } from './types';
+import pino from "pino";
+import { LoggerConfig, LogLevel } from "./types";
 
 export class Logger {
   private logger: pino.Logger;
@@ -11,25 +11,39 @@ export class Logger {
       level: config.level,
       redact: config.redactKeys,
       transport: {
-        target: 'pino-pretty',
+        target: "pino-pretty",
       },
     });
   }
 
   log(level: LogLevel, message: string, data?: Record<string, unknown>): void {
-    if (level === 'task-progress' || level === 'agent-activity') {
+    if (level === "task-progress" || level === "agent-activity") {
       this.logger.info({ ...data, eventType: level }, message);
       return;
     }
 
-    this.logger[level as 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace'](data, message);
+    this.logger[
+      level as "fatal" | "error" | "warn" | "info" | "debug" | "trace"
+    ](data, message);
   }
 
   logTaskProgress(taskId: string, progress: number, status: string): void {
-    this.log('task-progress', `Task ${taskId} progress: ${progress}%`, { taskId, progress, status });
+    this.log("task-progress", `Task ${taskId} progress: ${progress}%`, {
+      taskId,
+      progress,
+      status,
+    });
   }
 
-  logAgentActivity(agentId: string, action: string, details?: Record<string, unknown>): void {
-    this.log('agent-activity', `Agent ${agentId} ${action}`, { agentId, action, ...details });
+  logAgentActivity(
+    agentId: string,
+    action: string,
+    details?: Record<string, unknown>,
+  ): void {
+    this.log("agent-activity", `Agent ${agentId} ${action}`, {
+      agentId,
+      action,
+      ...details,
+    });
   }
 }

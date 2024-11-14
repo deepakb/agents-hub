@@ -1,7 +1,7 @@
-import { Logger } from '@agent-forge/logger';
-import { AgentError } from '@agent-forge/error-handler';
-import { AgentConfig, AgentState, TaskContext } from './types';
-import { AgentLifecycle } from './lifecycle';
+import { Logger } from "@agent-forge/logger";
+import { AgentError } from "@agent-forge/error-handler";
+import { AgentConfig, AgentState, TaskContext } from "./types";
+import { AgentLifecycle } from "./lifecycle";
 
 export class Agent {
   private state: AgentState;
@@ -12,10 +12,10 @@ export class Agent {
     public readonly id: string,
     public readonly name: string,
     private config: AgentConfig,
-    private logger: Logger
+    private logger: Logger,
   ) {
     this.state = {
-      status: 'idle',
+      status: "idle",
       currentTasks: new Set(),
       lastActivity: new Date(),
     };
@@ -26,22 +26,25 @@ export class Agent {
   async init(): Promise<void> {
     try {
       await this.lifecycle.start();
-      this.logger.logAgentActivity(this.id, 'initialized');
+      this.logger.logAgentActivity(this.id, "initialized");
     } catch (error) {
-      this.state.status = 'error';
+      this.state.status = "error";
       throw new AgentError(`Failed to initialize agent ${this.id}`, this.id);
     }
   }
 
-  async startTask(taskId: string, data: Record<string, unknown>): Promise<void> {
+  async startTask(
+    taskId: string,
+    data: Record<string, unknown>,
+  ): Promise<void> {
     if (this.state.currentTasks.size >= this.config.maxConcurrentTasks) {
       throw new AgentError(`Agent ${this.id} is at maximum capacity`, this.id);
     }
 
-    if (this.state.status !== 'idle') {
+    if (this.state.status !== "idle") {
       throw new AgentError(
         `Agent ${this.id} is not available (status: ${this.state.status})`,
-        this.id
+        this.id,
       );
     }
 
@@ -49,15 +52,15 @@ export class Agent {
       taskId,
       data,
       startTime: new Date(),
-      status: 'running',
+      status: "running",
     };
 
     this.taskContexts.set(taskId, taskContext);
     this.state.currentTasks.add(taskId);
-    this.state.status = 'busy';
+    this.state.status = "busy";
     this.state.lastActivity = new Date();
 
-    this.logger.logAgentActivity(this.id, 'started task', {
+    this.logger.logAgentActivity(this.id, "started task", {
       taskId,
       data,
     });
@@ -66,19 +69,22 @@ export class Agent {
   async completeTask(taskId: string, result: unknown): Promise<void> {
     const taskContext = this.taskContexts.get(taskId);
     if (!taskContext) {
-      throw new AgentError(`Task ${taskId} not found for agent ${this.id}`, this.id);
+      throw new AgentError(
+        `Task ${taskId} not found for agent ${this.id}`,
+        this.id,
+      );
     }
 
-    taskContext.status = 'completed';
+    taskContext.status = "completed";
     taskContext.result = result;
     this.state.currentTasks.delete(taskId);
     this.state.lastActivity = new Date();
 
     if (this.state.currentTasks.size === 0) {
-      this.state.status = 'idle';
+      this.state.status = "idle";
     }
 
-    this.logger.logAgentActivity(this.id, 'completed task', {
+    this.logger.logAgentActivity(this.id, "completed task", {
       taskId,
       result,
     });
@@ -87,19 +93,22 @@ export class Agent {
   async failTask(taskId: string, error: Error): Promise<void> {
     const taskContext = this.taskContexts.get(taskId);
     if (!taskContext) {
-      throw new AgentError(`Task ${taskId} not found for agent ${this.id}`, this.id);
+      throw new AgentError(
+        `Task ${taskId} not found for agent ${this.id}`,
+        this.id,
+      );
     }
 
-    taskContext.status = 'failed';
+    taskContext.status = "failed";
     taskContext.error = error;
     this.state.currentTasks.delete(taskId);
     this.state.lastActivity = new Date();
 
     if (this.state.currentTasks.size === 0) {
-      this.state.status = 'idle';
+      this.state.status = "idle";
     }
 
-    this.logger.logAgentActivity(this.id, 'task failed', {
+    this.logger.logAgentActivity(this.id, "task failed", {
       taskId,
       error,
     });
