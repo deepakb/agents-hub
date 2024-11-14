@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-orchestration",
+  "name": "agent-forge",
   "private": true,
   "scripts": {
     "build": "turbo run build",

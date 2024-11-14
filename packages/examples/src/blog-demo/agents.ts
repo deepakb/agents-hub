@@ -1,5 +1,5 @@
 import { SpecializedAgent } from './specialized-agent';
-import { Logger } from '@nodejs-orchestration/logger';
+import { Logger } from '@agent-forge/logger';
 import { researchTopic, generateBlogContent } from './tools';
 
 const logger = new Logger({

@@ -1,5 +1,5 @@
 import OpenAI from 'openai';
-import { Tool } from '@nodejs-orchestration/tools';
+import { Tool } from '@agent-forge/tools';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY

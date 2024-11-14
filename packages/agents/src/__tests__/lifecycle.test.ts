@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { AgentLifecycle } from '../lifecycle';
-import { Logger } from '@nodejs-orchestration/logger';
-import { AgentError } from '@nodejs-orchestration/error-handler';
+import { Logger } from '@agent-forge/logger';
+import { AgentError } from '@agent-forge/error-handler';
 import { AgentState } from '../types';
 
 describe('AgentLifecycle', () => {

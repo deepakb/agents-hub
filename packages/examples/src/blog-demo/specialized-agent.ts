@@ -1,6 +1,6 @@
-import { Agent } from '@nodejs-orchestration/agents';
-import { Tool } from '@nodejs-orchestration/tools';
-import { Logger } from '@nodejs-orchestration/logger';
+import { Agent } from '@agent-forge/agents';
+import { Tool } from '@agent-forge/tools';
+import { Logger } from '@agent-forge/logger';
 
 export class SpecializedAgent extends Agent {
   private transferFunctions: Map<string, () => SpecializedAgent>;

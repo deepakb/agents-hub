@@ -1,4 +1,4 @@
-import { Logger } from '@nodejs-orchestration/logger';
+import { Logger } from '@agent-forge/logger';
 import { SpecializedAgent } from './specialized-agent';
 import { processRefundTool, applyDiscountTool } from './functions';
 import * as readline from 'readline';

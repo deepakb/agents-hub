@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ToolRegistry } from '../registry';
-import { ToolError } from '@nodejs-orchestration/error-handler';
+import { ToolError } from '@agent-forge/error-handler';
 
 describe('ToolRegistry', () => {
   let registry: ToolRegistry;

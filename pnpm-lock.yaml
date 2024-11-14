@@ -23,13 +23,13 @@ importers:
 
   packages/agents:
     dependencies:
-      '@nodejs-orchestration/error-handler':
+      '@agent-forge/error-handler':
         specifier: workspace:*
         version: link:../error-handler
-      '@nodejs-orchestration/logger':
+      '@agent-forge/logger':
         specifier: workspace:*
         version: link:../logger
-      '@nodejs-orchestration/tools':
+      '@agent-forge/tools':
         specifier: workspace:*
         version: link:../tools
       zod:
@@ -45,13 +45,13 @@ importers:
 
   packages/api:
     dependencies:
-      '@nodejs-orchestration/core':
+      '@agent-forge/core':
         specifier: workspace:*
         version: link:../core
-      '@nodejs-orchestration/error-handler':
+      '@agent-forge/error-handler':
         specifier: workspace:*
         version: link:../error-handler
-      '@nodejs-orchestration/logger':
+      '@agent-forge/logger':
         specifier: workspace:*
         version: link:../logger
       axios:
@@ -70,10 +70,10 @@ importers:
 
   packages/config:
     dependencies:
-      '@nodejs-orchestration/error-handler':
+      '@agent-forge/error-handler':
         specifier: workspace:*
         version: link:../error-handler
-      '@nodejs-orchestration/logger':
+      '@agent-forge/logger':
         specifier: workspace:*
         version: link:../logger
       zod:
@@ -102,7 +102,7 @@ importers:
 
   packages/error-handler:
     dependencies:
-      '@nodejs-orchestration/logger':
+      '@agent-forge/logger':
         specifier: workspace:*
         version: link:../logger
     devDependencies:
@@ -115,16 +115,16 @@ importers:
 
   packages/examples:
     dependencies:
-      '@nodejs-orchestration/error-handler':
+      '@agent-forge/error-handler':
         specifier: workspace:*
         version: link:../error-handler
-      '@nodejs-orchestration/logger':
+      '@agent-forge/logger':
         specifier: workspace:*
         version: link:../logger
-      '@nodejs-orchestration/tools':
+      '@agent-forge/tools':
         specifier: workspace:*
         version: link:../tools
-      '@nodejs-orchestration/workflow':
+      '@agent-forge/workflow':
         specifier: workspace:*
         version: link:../workflow
       dotenv:
@@ -162,7 +162,7 @@ importers:
 
   packages/tools:
     dependencies:
-      '@nodejs-orchestration/error-handler':
+      '@agent-forge/error-handler':
         specifier: workspace:*
         version: link:../error-handler
       zod:
@@ -178,16 +178,16 @@ importers:
 
   packages/workflow:
     dependencies:
-      '@nodejs-orchestration/core':
+      '@agent-forge/core':
         specifier: workspace:*
         version: link:../core
-      '@nodejs-orchestration/error-handler':
+      '@agent-forge/error-handler':
         specifier: workspace:*
         version: link:../error-handler
-      '@nodejs-orchestration/logger':
+      '@agent-forge/logger':
         specifier: workspace:*
         version: link:../logger
-      '@nodejs-orchestration/tools':
+      '@agent-forge/tools':
         specifier: workspace:*
         version: link:../tools
       zod:

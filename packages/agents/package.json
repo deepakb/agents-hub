@@ -1,5 +1,5 @@
 {
-  "name": "@nodejs-orchestration/agents",
+  "name": "@agent-forge/agents",
   "version": "0.1.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -11,9 +11,9 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@nodejs-orchestration/tools": "workspace:*",
-    "@nodejs-orchestration/error-handler": "workspace:*",
-    "@nodejs-orchestration/logger": "workspace:*",
+    "@agent-forge/tools": "workspace:*",
+    "@agent-forge/error-handler": "workspace:*",
+    "@agent-forge/logger": "workspace:*",
     "zod": "^3.22.2"
   },
   "devDependencies": {

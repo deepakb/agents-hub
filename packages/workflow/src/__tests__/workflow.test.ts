@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { WorkflowEngine } from '../workflow';
-import { ToolRegistry } from '@nodejs-orchestration/tools';
-import { RetryManager } from '@nodejs-orchestration/error-handler';
-import { Logger } from '@nodejs-orchestration/logger';
+import { ToolRegistry } from '@agent-forge/tools';
+import { RetryManager } from '@agent-forge/error-handler';
+import { Logger } from '@agent-forge/logger';
 
 describe('WorkflowEngine', () => {
   const mockToolRegistry = {

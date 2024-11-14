@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { ConfigManager } from '../config';
-import { Logger } from '@nodejs-orchestration/logger';
+import { Logger } from '@agent-forge/logger';
 
 describe('ConfigManager', () => {
   const mockLogger = {

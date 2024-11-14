@@ -1,5 +1,5 @@
 import { Tool, ToolSchema } from './types';
-import { ToolError } from '@nodejs-orchestration/error-handler';
+import { ToolError } from '@agent-forge/error-handler';
 
 export class ToolRegistry {
   private tools: Map<string, Tool> = new Map();

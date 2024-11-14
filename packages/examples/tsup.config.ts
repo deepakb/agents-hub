@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsup';
 
 export default defineConfig({
-  entry: ['customer-service-demo/demo.ts'],
+  entry: ['src/blog-demo/blog-demo.ts', 'src/agent-demo/demo.ts', 'src/agent-demo/interactive-demo.ts'],
   format: ['cjs', 'esm'],
   dts: true,
   splitting: false,

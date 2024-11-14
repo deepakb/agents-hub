@@ -1,4 +1,4 @@
-import { Tool } from '@nodejs-orchestration/tools';
+import { Tool } from '@agent-forge/tools';
 
 export const processRefundTool: Tool = {
   id: 'process-refund',

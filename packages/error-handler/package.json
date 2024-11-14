@@ -1,5 +1,5 @@
 {
-  "name": "@nodejs-orchestration/error-handler",
+  "name": "@agent-forge/error-handler",
   "version": "0.1.0",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -11,7 +11,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@nodejs-orchestration/logger": "workspace:*"
+    "@agent-forge/logger": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^7.2.0",

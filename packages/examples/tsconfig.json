@@ -5,7 +5,7 @@
     "rootDir": "../../",
     "baseUrl": ".",
     "paths": {
-      "@nodejs-orchestration/*": ["../*/src"]
+      "@agent-forge/*": ["../*/src"]
     }
   },
   "include": ["src/**/*.ts"]

@@ -1,4 +1,4 @@
-# Node.js Orchestration
+# Agent Forge
 
 A powerful, modular system for orchestrating autonomous agents and workflows in Node.js applications.
 
@@ -14,15 +14,15 @@ A powerful, modular system for orchestrating autonomous agents and workflows in 
 ## Installation
 
 ```bash
-npm install nodejs-orchestration
+npm install agent-forge
 ```
 
 ## Quick Start
 
 ```typescript
-import { Orchestrator, Agent } from '@nodejs-orchestration/core';
-import { ToolRegistry } from '@nodejs-orchestration/tools';
-import { Logger } from '@nodejs-orchestration/logger';
+import { Orchestrator, Agent } from '@agent-forge/core';
+import { ToolRegistry } from '@agent-forge/tools';
+import { Logger } from '@agent-forge/logger';
 
 // Initialize components
 const logger = new Logger({ level: 'info' });
@@ -52,7 +52,7 @@ await orchestrator.assignTask({
 ## Workflow Example
 
 ```typescript
-import { WorkflowEngine } from '@nodejs-orchestration/workflow';
+import { WorkflowEngine } from '@agent-forge/workflow';
 
 const workflow = {
   id: 'data-processing',
