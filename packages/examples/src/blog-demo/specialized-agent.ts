@@ -12,7 +12,11 @@ export class SpecializedAgent extends Agent {
     private tools: Tool[],
     logger: Logger,
   ) {
-    super(id, name, {}, logger);
+    super(id, name, {
+      maxConcurrentTasks: 5,
+      capabilities: [],
+      metadata: {}
+    }, logger);
     this.transferFunctions = new Map();
   }
 
