@@ -10,7 +10,8 @@
     "clean": "rm -rf dist",
     "test": "vitest",
     "demo:customer-service": "tsx -r dotenv/config  ./src/customer-service-demo/demo.ts",
-    "demo:agent": "tsx -r dotenv/config  ./src/agent-demo/demo.ts"
+    "demo:agent": "tsx -r dotenv/config  ./src/agent-demo/demo.ts",
+    "demo:interactive": "tsx -r dotenv/config ./src/agent-demo/interactive-demo.ts"
   },
   "dependencies": {
     "@nodejs-orchestration/error-handler": "workspace:*",
